@@ -1,13 +1,13 @@
 //Variables globales
 
 const ss = SpreadsheetApp.getActiveSpreadsheet();
-const hojaOrigen=ss.getSheetByName('inventario y resp');
-const hojaDestino=ss.getActiveSheet();
-const ultimaFilaOrigen=hojaOrigen.getLastRow();
-const rangoOrigen=hojaOrigen.getRange(7,1,ultimaFilaOrigen,18)
-const pcsAutorizadas=hojaOrigen.getRange('b2').getValue();
+const hojaOrigen = ss.getSheetByName('inventario y resp');
+const hojaDestino = ss.getActiveSheet();
+const ultimaFilaOrigen = hojaOrigen.getLastRow();
+const rangoOrigen = hojaOrigen.getRange(7,1,ultimaFilaOrigen,18)
+const pcsAutorizadas = hojaOrigen.getRange('b2').getValue();
 
-const idPlantilla='10APQHQDVjb2DtbSoScT81r1ZomIreaDhOdDLNC9Fdbk';
+const idPlantilla = '10APQHQDVjb2DtbSoScT81r1ZomIreaDhOdDLNC9Fdbk';
 const url = "https://docs.google.com/spreadsheets/d/"+idPlantilla;
 
 
@@ -25,7 +25,7 @@ const onOpen = () => {
 
 const pegarPCs = () => {
 
-  let uI=SpreadsheetApp.getUi();
+  let uI = SpreadsheetApp.getUi();
 
   if (hojaDestino.getSheetName()==hojaOrigen.getSheetName()){
     uI.alert('Error! Posicionese en la hoja del mes correspondiente');
@@ -123,13 +123,13 @@ const pegarPCs = () => {
 
 const fechaIni = () => {
 
-  let ss =SpreadsheetApp.getActiveSpreadsheet()
-  let sheet=ss.getActiveSheet();
-  let activa=sheet.getActiveCell();
-  let nombreEmpresa=sheet.getRange('a1').getValue();
-  let fila=activa.getRow();
-  let equipo=sheet.getRange(fila,1).getValue();
-  let mes=sheet.getRange('c1').getValue();
+  let ss = SpreadsheetApp.getActiveSpreadsheet()
+  let sheet = ss.getActiveSheet();
+  let activa = sheet.getActiveCell();
+  let nombreEmpresa = sheet.getRange('a1').getValue();
+  let fila = activa.getRow();
+  let equipo = sheet.getRange(fila,1).getValue();
+  let mes = sheet.getRange('c1').getValue();
   Logger.log(fila);
 
   if (sheet.getRange(fila,21).getValue()=="") {
@@ -137,15 +137,15 @@ const fechaIni = () => {
     let celdaFecha=sheet.getRange(fila,21).setValue(new Date())
     let celdahorario=sheet.getRange(fila,22).setValue(new Date());
     let hojaLog=ss.getSheetByName('Log horarios');
-    let ultimaFilaLog=hojaLog.getLastRow();
-    hojaLog.getRange(ultimaFilaLog+1,1).setValue(nombreEmpresa);
-    hojaLog.getRange(ultimaFilaLog+1,2).setValue(equipo);
-    hojaLog.getRange(ultimaFilaLog+1,3).setValue(mes);
-    hojaLog.getRange(ultimaFilaLog+1,4).setValue(new Date());
-    hojaLog.getRange(ultimaFilaLog+1,5).setValue(new Date());
-    hojaLog.getRange(ultimaFilaLog+1,7).setFormula(sheet.getSheetName()+'!' + sheet.getRange(fila,22).getA1Notation());
-    hojaLog.getRange(ultimaFilaLog+1,8).setFormula(hojaLog.getRange(ultimaFilaLog+1,5)
-    .getA1Notation()+'-'+hojaLog.getRange(ultimaFilaLog+1,7)
+    let ultimaFilaLog = hojaLog.getLastRow() + 1;
+    hojaLog.getRange(ultimaFilaLog,1).setValue(nombreEmpresa);
+    hojaLog.getRange(ultimaFilaLog,2).setValue(equipo);
+    hojaLog.getRange(ultimaFilaLog,3).setValue(mes);
+    hojaLog.getRange(ultimaFilaLog,4).setValue(new Date());
+    hojaLog.getRange(ultimaFilaLog,5).setValue(new Date());
+    hojaLog.getRange(ultimaFilaLog,7).setFormula(sheet.getSheetName()+'!' + sheet.getRange(fila,22).getA1Notation());
+    hojaLog.getRange(ultimaFilaLog,8).setFormula(hojaLog.getRange(ultimaFilaLog,5)
+    .getA1Notation()+'-'+hojaLog.getRange(ultimaFilaLog,7)
     .getA1Notation()).setNumberFormat("0.000");
 
   } else { SpreadsheetApp.getUi().alert("La celda ya tiene cargada su fecha de inico") }
@@ -154,25 +154,26 @@ const fechaIni = () => {
 
 const fechaFin = () => {
 
-  let ss =SpreadsheetApp.getActiveSpreadsheet();
-  let sheet=ss.getActiveSheet();
-  let mes=sheet.getRange('c1').getValue();
-  let nombreEmpresa=sheet.getRange('a1').getValue();
-  let activa=sheet.getActiveCell();
-  let fila=activa.getRow();
-  let equipo=sheet.getRange(fila,1).getValue();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getActiveSheet();
+  let mes = sheet.getRange('c1').getValue();
+  let nombreEmpresa = sheet.getRange('a1').getValue();
+  let activa = sheet.getActiveCell();
+  let fila = activa.getRow();
+  let equipo = sheet.getRange(fila,1).getValue();
 
   if (sheet.getRange(fila,23).getValue()=="") {
-    let celdaFecha=sheet.getRange(fila,23).setValue(new Date());
-    let hojaLog=ss.getSheetByName('Log horarios');
-    let ultimaFilaLog=hojaLog.getLastRow();
-    hojaLog.getRange(ultimaFilaLog+1,1).setValue(nombreEmpresa);
-    hojaLog.getRange(ultimaFilaLog+1,2).setValue(equipo);
-    hojaLog.getRange(ultimaFilaLog+1,3).setValue(mes);
-    hojaLog.getRange(ultimaFilaLog+1,6).setValue(new Date());
-    hojaLog.getRange(ultimaFilaLog+1,9).setFormula(sheet.getSheetName()+'!' + sheet.getRange(fila,23).getA1Notation());
-    hojaLog.getRange(ultimaFilaLog+1,10).setFormula(hojaLog.getRange(ultimaFilaLog+1,6)
-    .getA1Notation()+'-'+hojaLog.getRange(ultimaFilaLog+1,9)
+
+    let celdaFecha = sheet.getRange(fila,23).setValue(new Date());
+    let hojaLog = ss.getSheetByName('Log horarios');
+    let ultimaFilaLog = hojaLog.getLastRow() +1;
+    hojaLog.getRange(ultimaFilaLog,1).setValue(nombreEmpresa);
+    hojaLog.getRange(ultimaFilaLog,2).setValue(equipo);
+    hojaLog.getRange(ultimaFilaLog,3).setValue(mes);
+    hojaLog.getRange(ultimaFilaLog,6).setValue(new Date());
+    hojaLog.getRange(ultimaFilaLog,9).setFormula(sheet.getSheetName()+'!' + sheet.getRange(fila,23).getA1Notation());
+    hojaLog.getRange(ultimaFilaLog,10).setFormula(hojaLog.getRange(ultimaFilaLog,6)
+    .getA1Notation()+'-'+hojaLog.getRange(ultimaFilaLog,9)
     .getA1Notation()).setNumberFormat("0.000");
 
   } else { SpreadsheetApp.getUi().alert("La celda ya tiene cargada su fecha de fin") }
@@ -181,32 +182,32 @@ const fechaFin = () => {
 
 const irAlMesEnCurso = () => {
 
-  let ss=SpreadsheetApp.getActiveSpreadsheet();
-  let idss=ss.getId();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let idss = ss.getId();
 
-  if(idss==idPlantilla) {
+  if (idss==idPlantilla) {
     SpreadsheetApp.getUi().alert('Cree el archivo primero. Usted intenta escribir en la plantilla')
     return;
   }
-  let mes=ss.getSheetByName('controles').getRange('ae1').getValue();
-  let hojaMes=ss.setActiveSheet(ss.getSheetByName(mes)).activate();
+  let mes = ss.getSheetByName('controles').getRange('ae1').getValue();
+  let hojaMes = ss.setActiveSheet(ss.getSheetByName(mes)).activate();
 
 }
 
 
 const abrirArchivoEmpresa = () => {
 
-  let ss=SpreadsheetApp.getActiveSpreadsheet();
-  let idArchivo=ss.getId();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let idArchivo = ss.getId();
 
-  if (idArchivo!=idPlantilla){
+  if (idArchivo!=idPlantilla) {
 
   SpreadsheetApp.getUi().alert('Error, debe elegir los archivos desde la Plantilla');
   return;
 
   } else {
 
-  let id=ss.getSheetByName('menu').getRange('h16').getValue();
+  let id = ss.getSheetByName('menu').getRange('h16').getValue();
 
   //ABRE EL ARCHIVO CREADO
   let url = "https://docs.google.com/spreadsheets/d/"+id;
@@ -219,7 +220,7 @@ const abrirArchivoEmpresa = () => {
 
 const abrirPlantilla = () => {
 
-   let idActivo=SpreadsheetApp.getActiveSpreadsheet().getId();
+   let idActivo = SpreadsheetApp.getActiveSpreadsheet().getId();
 
    if (idPlantilla==idActivo) {
      SpreadsheetApp.getUi().alert('Usted ya se encuentra en la Plantilla');
@@ -235,14 +236,14 @@ const abrirPlantilla = () => {
 
 const irAlInventario = () => {
 
-  let ss=SpreadsheetApp.getActiveSpreadsheet();
-  let idss=ss.getId();
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let idss = ss.getId();
 
-  if(idss==idPlantilla) {
+  if (idss==idPlantilla) {
     SpreadsheetApp.getUi().alert('Cree el archivo primero. Usted intenta escribir en la plantilla')
     return;
   }
 
-  let hojaInve=ss.setActiveSheet(ss.getSheetByName('inventario y resp')).activate();
+  let hojaInve = ss.setActiveSheet(ss.getSheetByName('inventario y resp')).activate();
 
 }
